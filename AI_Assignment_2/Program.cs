@@ -10,6 +10,8 @@ namespace AI_Assignment_2
 
 			//this obvioulsy needs to be better
 			BuildKB KB = new BuildKB("test1.txt");
+			TruthTable TT = new TruthTable(KB.Implies, KB.Vars, "a");
+			Console.WriteLine(TT.BuildTT());
 			Console.ReadLine();
 
 

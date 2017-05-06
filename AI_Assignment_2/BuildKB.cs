@@ -12,6 +12,7 @@ namespace AI_Assignment_2
 		private string _file;
 		private string _kb;
 		private string _ask;
+		//not too keen on using a list for this. Can't really think of anything better though. 
 		public List<string> Implies = new List<string>();
 		public List<string> Vars = new List<string>();
 
@@ -170,6 +171,7 @@ namespace AI_Assignment_2
 				{
 				Console.Write("{0}  ",v);
 				}
+			Console.WriteLine();
 
 		}
 
