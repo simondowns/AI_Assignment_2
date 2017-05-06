@@ -59,6 +59,7 @@ namespace AI_Assignment_2
 			//first split them up into statements and variables
 			List<string> allTheBits = new List<string>();
 			allTheBits = _kb.Split(';').ToList();
+			List<string> seperateMe = new List<string>();
 			foreach (string s in allTheBits)
 			{
 				//Console.WriteLine(s);
@@ -74,16 +75,16 @@ namespace AI_Assignment_2
 					bool after = false;
 					foreach (char c in s)
 					{
-						
+
 						if (after)
 						{
-							if(c != '>')
-							right += c;
+							if (c != '>')
+								right += c;
 						}
 						else
 						{
 							if (c != '=')
-							left += c;
+								left += c;
 						}
 						if (c == '=')
 						{
@@ -96,7 +97,7 @@ namespace AI_Assignment_2
 					right = right.TrimEnd(' ');
 					right = right.TrimStart(' ');
 					//Console.WriteLine("{0} and {1}", left, right);
-					List<string> seperateMe = new List<string>();
+
 
 					//now parse the variables.
 					if (left.Length > 1)
@@ -104,7 +105,8 @@ namespace AI_Assignment_2
 						//do stuff
 						seperateMe.Add(left);
 						if (!Vars.Contains(left))
-							Vars.Add(left);					}
+							Vars.Add(left);
+					}
 					else
 					{
 						if (!Vars.Contains(left))
@@ -115,25 +117,42 @@ namespace AI_Assignment_2
 						//do stuff
 						seperateMe.Add(right);
 						if (!Vars.Contains(right))
-							Vars.Add(right);					}
+							Vars.Add(right);
+					}
 					else
 					{
 						if (!Vars.Contains(right))
 							Vars.Add(right);
 					}
-					string temp = "";
-					foreach (string sep in seperateMe)
+
+
+				}
+				else
+				{
+					Vars.Add(s);
+				}
+				foreach (string sep in seperateMe)
+				{
+					string newVar = "";
+					foreach (char c in sep)
 					{
-						if ((specChars.Contains(sep)) && (temp != ""))
+						if (c == '&')
 						{
-							Vars.Add(temp);
-							temp = "";
+							if (!Vars.Contains(newVar))
+								Vars.Add(newVar);							
+							newVar = "";
 						}
 						else
 						{
-							temp += sep;
+							newVar += c.ToString();
+						}
+						if (newVar != "")
+						{
+							if (!Vars.Contains(newVar))
+								Vars.Add(newVar);
 						}
 					}
+
 				}
 
 
@@ -144,11 +163,12 @@ namespace AI_Assignment_2
 
 
 			}
+		
 			Console.WriteLine("*******************\n Variables");
 			Console.WriteLine("*******************");
 			foreach (string v in Vars)
 				{
-				Console.Write("{0} \t",v);
+				Console.Write("{0}  ",v);
 				}
 
 		}
