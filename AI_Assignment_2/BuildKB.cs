@@ -15,6 +15,7 @@ namespace AI_Assignment_2
 		//not too keen on using a list for this. Can't really think of anything better though. 
 		public List<string> Implies = new List<string>();
 		public List<string> Vars = new List<string>();
+		public List<string> TrueVars = new List<string>();
 
 		/// <summary>
 		/// Parses the Knowledge Base from the text file.
@@ -154,6 +155,14 @@ namespace AI_Assignment_2
 						}
 					}
 
+				}
+				//just plain true variables
+				if (s.Length <= 3)
+				{
+					string temp;
+					temp = s.TrimStart(' ');
+					temp = temp.TrimEnd(' ');
+					TrueVars.Add(temp);
 				}
 
 
